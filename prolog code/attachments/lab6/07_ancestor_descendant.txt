@@ -1,0 +1,51 @@
+Problem 7: Ancestor and Descendant Relations
+
+Given parent/2 facts, define ancestor/2 and descendant/2 recursively.
+
+Prolog Solution
+----------------
+
+% Sample family facts.
+parent(john, mary).
+parent(john, peter).
+parent(mary, alice).
+parent(mary, david).
+parent(peter, sophia).
+
+% Direct parent is an ancestor.
+ancestor(X, Y) :-
+    parent(X, Y).
+
+% If X is a parent of Z and Z is an ancestor of Y,
+% then X is also an ancestor of Y.
+ancestor(X, Y) :-
+    parent(X, Z),
+    ancestor(Z, Y).
+
+% Descendant is the reverse relation of ancestor.
+descendant(X, Y) :-
+    ancestor(Y, X).
+
+Sample Queries
+--------------
+?- ancestor(john, alice).
+
+Expected Output
+---------------
+true.
+
+?- descendant(alice, john).
+
+Expected Output
+---------------
+true.
+
+?- ancestor(john, X).
+
+Expected Output
+---------------
+X = mary ;
+X = peter ;
+X = alice ;
+X = david ;
+X = sophia.

@@ -1,0 +1,32 @@
+Problem 13: Check Prime Number
+
+Uses basic divisor checking.
+
+Prolog Solution
+----------------
+
+is_prime(N) :-
+    N > 1,
+    \+ has_divisor(N, 2).
+
+% A number has a divisor when D divides N exactly.
+has_divisor(N, D) :-
+    D * D =< N,
+    ( N mod D =:= 0
+    ; D1 is D + 1,
+      has_divisor(N, D1)
+    ).
+
+Sample Queries
+--------------
+?- is_prime(17).
+
+Expected Output
+---------------
+true.
+
+?- is_prime(18).
+
+Expected Output
+---------------
+false.

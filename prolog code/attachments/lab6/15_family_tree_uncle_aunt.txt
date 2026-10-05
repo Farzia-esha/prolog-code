@@ -1,0 +1,52 @@
+Problem 15: Family Tree – Uncle/Aunt Relation
+
+Extend parent/2 to define uncle/2 or aunt/2 using sibling/2.
+
+Prolog Solution
+----------------
+
+% Sample family facts.
+parent(john, mary).
+parent(john, peter).
+parent(john, lucy).
+parent(mary, alice).
+parent(peter, bob).
+parent(lucy, carol).
+
+% Sibling relation.
+sibling(X, Y) :-
+    parent(P, X),
+    parent(P, Y),
+    X \= Y.
+
+% An uncle is a male sibling of one of the person's parents.
+uncle(Uncle, Person) :-
+    parent(Parent, Person),
+    sibling(Uncle, Parent),
+    male(Uncle).
+
+% An aunt is a female sibling of one of the person's parents.
+aunt(Aunt, Person) :-
+    parent(Parent, Person),
+    sibling(Aunt, Parent),
+    female(Aunt).
+
+% Gender facts.
+male(peter).
+male(john).
+female(lucy).
+female(mary).
+
+Sample Queries
+--------------
+?- uncle(peter, alice).
+
+Expected Output
+---------------
+true.
+
+?- aunt(lucy, alice).
+
+Expected Output
+---------------
+true.

@@ -1,0 +1,26 @@
+Problem 2: Sum of Even Numbers in a List
+
+Prolog Solution
+----------------
+
+% Empty list: sum of even numbers is 0.
+sum_even([], 0).
+
+% If the first element is even, add it to the result.
+sum_even([H|T], Sum) :-
+    0 is H mod 2,
+    sum_even(T, Rest),
+    Sum is H + Rest.
+
+% If the first element is odd, ignore it.
+sum_even([H|T], Sum) :-
+    1 is H mod 2,
+    sum_even(T, Sum).
+
+Sample Query
+------------
+?- sum_even([1,2,3,4,5,6], S).
+
+Expected Output
+---------------
+S = 12.

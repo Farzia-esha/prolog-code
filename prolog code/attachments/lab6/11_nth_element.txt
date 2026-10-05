@@ -1,0 +1,21 @@
+Problem 11: N-th Element of a List (1-based indexing)
+
+Prolog Solution
+----------------
+
+% The first element is at position 1.
+nth_element(1, [H|_], H).
+
+% For later positions, move to the tail and decrease N.
+nth_element(N, [_|T], Elem) :-
+    N > 1,
+    N1 is N - 1,
+    nth_element(N1, T, Elem).
+
+Sample Query
+------------
+?- nth_element(3, [a,b,c,d,e], E).
+
+Expected Output
+---------------
+E = c.

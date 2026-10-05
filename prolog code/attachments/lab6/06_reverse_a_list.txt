@@ -1,0 +1,22 @@
+Problem 6: Reverse a List
+
+Prolog Solution
+----------------
+
+reverse_list([], []).
+
+reverse_list([H|T], Output) :-
+    reverse_list(T, Rest),
+    append_one(Rest, H, Output).
+
+append_one([], X, [X]).
+append_one([H|T], X, [H|R]) :-
+    append_one(T, X, R).
+
+Sample Query
+------------
+?- reverse_list([1,2,3,4], R).
+
+Expected Output
+---------------
+R = [4,3,2,1].
